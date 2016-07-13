@@ -16,7 +16,9 @@ class StockPriceRouter extends Actor {
     case ticker:String => {
       println(s"Firing requests to service apis for: $ticker")
       val yahooFinder = context.actorOf(Props[YahooFinanceFinder], "YahooFinanceFinder")
+      val msnFinder = context.actorOf(Props[MsnFinanceFinder], "MsnFinanceFinder")
       yahooFinder ! ticker
+      msnFinder ! ticker
       println(s"Fired requests to third party service apis")
     }
 
